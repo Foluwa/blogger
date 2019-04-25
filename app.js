@@ -15,7 +15,7 @@ const router = express.Router();
 //ROUTES
 const routes = require('./routes/index');
 const app = express();
-const port = 3003;
+const port = process.env.PORT ||3003;
 
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://wgbadmin:wgbadmin1@ds227594.mlab.com:27594/the-wgb", { useNewUrlParser: true}).then(
