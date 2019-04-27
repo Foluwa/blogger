@@ -1,6 +1,6 @@
 <div class="container">
   <div class="col-md-9 bann-right">
-    <!-- banner -->
+    <!-- banner 
     <div class="banner">    
       <div class="header-slider">
         <div class="slider">
@@ -38,59 +38,39 @@
             </div>
          </div>
       </div>
-    </div>
+    </div> -->
     <!-- banner --> 
     <!-- nam-matis -->
-    <div class="nam-matis">
+    <div class="nam-matis">               
       <div class="nam-matis-top">
+        {{# each posts }} 
+        {{# each this }} 
             <div class="col-md-6 nam-matis-1">
               <a href="single.html"><img src="images/5.jpg" class="img-responsive" alt=""></a>
-              <h3><a href="single.html">Suspendisse a pellentesque dui</a></h3>
-              <p>Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</p>
+              <h3><a href="single.html">{{this.title}}</a></h3>
+              <p>{{this.body}}.<a href="/content">Read More</a></p>
             </div>
-            <div class="col-md-6 nam-matis-1">
-              <a href=""><img src="images/6.jpg" class="img-responsive" alt=""></a>
-              <h3><a href="">Suspendisse a pellentesque dui</a></h3>
-              <p>Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</p>
-            </div>
-              <div class="clearfix"> </div>
-        </div>
-        <div class="nam-matis-top">
-            <div class="col-md-6 nam-matis-1">
-              <a href="single.html"><img src="images/4.jpg" class="img-responsive" alt=""></a>
-              <h3><a href="single.html">Suspendisse a pellentesque dui</a></h3>
-              <p>Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</p>
-            </div>
-            <div class="col-md-6 nam-matis-1">
-              <a href="single.html"><img src="images/1.jpg" class="img-responsive" alt=""></a>
-              <h3><a href="single.html">Suspendisse a pellentesque dui</a></h3>
-              <p>Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</p>
-            </div>
-              <div class="clearfix"> </div>
-              <div class="nam-matis-top">
-            <div class="col-md-6 nam-matis-1">
-              <a href="single.html"><img src="images/5.jpg" class="img-responsive" alt=""></a>
-              <h3><a href="single.html">Suspendisse a pellentesque dui</a></h3>
-              <p>Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</p>
-            </div>
-            <div class="col-md-6 nam-matis-1">
-              <a href=""><img src="images/6.jpg" class="img-responsive" alt=""></a>
-              <h3><a href="">Suspendisse a pellentesque dui</a></h3>
-              <p>Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</p>
-            </div>
-              <div class="clearfix"> </div>
-        </div>
-          </div>  
-    </div>
-    <!-- nam-matis -->  
-  </div>
-  <div class="col-md-3 bann-left">
-    <div class="b-search">
-      <form>
-        <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
-        <input type="submit" value="">
-      </form>
-    </div>
+        {{/each}}
+        {{/each}}
+            <div class="clearfix"> </div>
+
+            <!---PAGINATION -->
+        <nav aria-label="...">
+          <ul class="pager">
+            <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
+            <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
+              </ul>
+        </nav>
+
+          <!-- nam-matis -->  
+        </div>  </div>  </div>
+        <div class="col-md-3 bann-left">
+          <div class="b-search">
+            <form>
+              <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+              <input type="submit" value="">
+            </form>
+          </div>
 
 
 
@@ -152,13 +132,6 @@
       </div>
         <div class="clearfix"> </div>
     </div>
-
-
-
-
-    <h1>YOU CAN PLACE YOUR ADVERTS HERE</h1>
-    <h1>YOU CAN PLACE YOUR ADVERTS HERE</h1>
-    <h1>YOU CAN PLACE YOUR ADVERTS HERE</h1>
     <h1>YOU CAN PLACE YOUR ADVERTS HERE</h1>
   </div>
   <div class="clearfix"> </div>

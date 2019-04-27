@@ -1,20 +1,34 @@
 const express = require('express');
 const router = express.Router();
 var passport = require('passport');
+var Post = require('../models/post.js');
 
 
 const hbs = require('hbs');
 
-var csrf = require('csurf');
-var csrfProtection = csrf();
-router.use(csrfProtection);
+// var csrf = require('csurf');
+// var csrfProtection = csrf();
+// router.use(csrfProtection);
 
 const Controller = require('../controller/controller.js');
 
 // GET HOME PAGE. 
 router.get('/', function (req, res, next) {
-        res.render('main/index',{
-    });
+    var productChunks = [];
+            
+            Post.find({}).then((result) => {
+                if(result){
+                    for (var i = 0; i < result.length; i++) {
+                    productChunks.push([result[i]]);
+                    }
+                }
+                res.render('main/index',{ 
+                    //user: req.user.email,
+                    posts: productChunks,
+                    //csrfToken: req.csrfToken(),
+                    //name:name 
+            });     
+        });
 });
 
 
@@ -27,10 +41,80 @@ router.get('/content', function (req, res, next) {
 
 //ADMINDASHBOARD
 router.get('/dashboard', function (req, res, next) {
-        res.render('admin/dashboard',{
-    });
+    var productChunks = [];
+            
+            Post.find({}).then((result) => {
+                if(result){
+                    for (var i = 0; i < result.length; i++) {
+                    productChunks.push([result[i]]);
+                    }
+                }
+                res.render('admin/dashboard',{ 
+                    //user: req.user.email,
+                    posts: productChunks,
+                    //csrfToken: req.csrfToken(),
+                    //name:name 
+            });     
+        });
 });
 
+
+// //ADMINDASHBOARD2
+// router.get('/submit-blog-post', function (req, res, next) {
+//         res.render('admin/dashboard',{
+//     });
+// });
+
+//SUBMIT BLOG POST   
+router.post('/submit-blog-post', function(req,res) {
+          console.log("About to submit blog post ");
+          console.log("About to save to the database");
+          var post = new Post({ 
+                title : req.body.title,
+                body : req.body.body,
+                tags: req.body.tags,
+                url: req.body.url,
+                author: req.body.author
+            });
+          console.log(post);
+
+            post.save()
+            .then(data => {
+                    console.log('Saving post to database');
+                    console.log(data);
+                    console.log('Post saved successfully');
+                    }).catch(err => {
+                    res.status(500).send({
+                    message: err.message
+            })
+                })
+                .catch((uploaderror)=>{
+                  console.log(uploaderror);
+                });
+      
+        //res.redirect('/dashboard',{
+              res.render('admin/dashboard',{
+
+        });
+    });
+
+//DELETE BLOG POST
+router.get("/delete/:id", function(req, res){
+   //FIND AND DELETE GROUP
+    console.log("Your id is " + req.params.id)
+    Post
+     .findByIdAndRemove(req.params.id)
+    .exec()
+    .then(doc => {
+        if(!doc) {
+            return res.status(404).end(); 
+        }
+        res.redirect("/dashboard");
+        return res.status(204).end();
+
+    })
+    .catch(err => next(err));
+});
 
 
 //SIGN IN
@@ -85,7 +169,9 @@ router.post('/signin', passport.authenticate('local.signin', {
 
 
 //ERROR PAGE
-router.get('*', Controller.error_page, function(req, res, next) {});
+router.get('*', function(req, res, next) {
+    res.render('main/error');
+});
 
 module.exports = router;
 

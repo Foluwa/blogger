@@ -17,24 +17,45 @@
 		<meta name="twitter:image" content="" />
 		<meta name="twitter:url" content="" />
 		<meta name="twitter:card" content="" />
-     <link type="text/css" rel="stylesheet" href="css/bootstrap.css"/> 
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css"/> 
     <link type="text/css" rel="stylesheet" href="css/style.css"/> 
+
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+    <script type="text/javascript" src="js/responsiveslides.min.js"></script>
+
+    <script>
+    $(function () {
+      $("#slider").responsiveSlides({
+        auto: true,
+        nav: true,
+        speed: 500,
+        namespace: "callbacks",
+        pager: true,
+      });
+    });
   
+  </script>
+
 
    
     </head>
-
     <body>
-
        {{> header }} 
           <div> 
             {{{body}}}
           </div>
        {{> footer }}
-
-    
-  
     </body>
+
+    <script type="text/javascript">
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+
   </html>
         
 
