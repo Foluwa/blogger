@@ -46,31 +46,31 @@
         {{# each posts }} 
         {{# each this }} 
             <div class="col-md-6 nam-matis-1">
-              <a href="single.html"><img src="images/5.jpg" class="img-responsive" alt=""></a>
-              <h3><a href="single.html">{{this.title}}</a></h3>
-              <p>{{this.body}}.<a href="/content">Read More</a></p>
+              <a href="single.html"><img src="{{this.url}}" class="img-responsive" alt=""></a>
+              <h3><a href="/content/{{this.id}}">{{this.title}}</a></h3>
+              <p><a href="/content/{{this.id}}">Read More</a></p>
             </div>
         {{/each}}
         {{/each}}
             <div class="clearfix"> </div>
 
             <!---PAGINATION -->
-        <nav aria-label="...">
-          <ul class="pager">
-            <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
-            <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
-              </ul>
-        </nav>
+            <nav aria-label="...">
+              <ul class="pager">
+                <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
+                <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
+                  </ul>
+            </nav>
 
-          <!-- nam-matis -->  
-        </div>  </div>  </div>
-        <div class="col-md-3 bann-left">
-          <div class="b-search">
-            <form>
-              <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
-              <input type="submit" value="">
-            </form>
-          </div>
+              <!-- nam-matis -->  
+            </div>  </div>  </div>
+            <div class="col-md-3 bann-left">
+              <div class="b-search">
+                <form>
+                  <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+                  <input type="submit" value="">
+                </form>
+              </div>
 
 
 
@@ -134,57 +134,13 @@
     </div>
     <h1>YOU CAN PLACE YOUR ADVERTS HERE</h1>
   </div>
+
+
   <div class="clearfix"> </div>
-    <div class="fle-xsel">
-      <ul id="flexiselDemo3">
-        <li>
-          <a href="#">
-            <div class="banner-1">
-              <img src="images/6.jpg" class="img-responsive" alt="">
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <div class="banner-1">
-              <img src="images/5.jpg" class="img-responsive" alt="">
-            </div>
-          </a>
-        </li>     
-        <li>
-          <a href="#">
-            <div class="banner-1">
-              <img src="images/1.jpg" class="img-responsive" alt="">
-            </div>
-          </a>
-        </li>   
-        <li>
-          <a href="#">
-            <div class="banner-1">
-              <img src="images/4.jpg" class="img-responsive" alt="">
-            </div>
-          </a>
-        </li> 
-        <li>
-          <a href="#">
-            <div class="banner-1">
-              <img src="images/6.jpg" class="img-responsive" alt="">
-            </div>
-          </a>
-        </li> 
-        <li>
-          <a href="#">
-            <div class="banner-1">
-              <img src="images/1.jpg" class="img-responsive" alt="">
-            </div>
-          </a>
-        </li>       
-      </ul>
               
-               <script type="text/javascript">
-                $(window).load(function() {
-                  
-                  $("#flexiselDemo3").flexisel({
+  <script type="text/javascript">
+            $(window).load(function() {    
+              $("#flexiselDemo3").flexisel({
                     visibleItems: 5,
                     animationSpeed: 1000,
                     autoPlay: true,
@@ -209,6 +165,6 @@
                   
                 });
                 </script>
-                <script type="text/javascript" src="js/jquery.flexisel.js"></script>
-          <div class="clearfix"> </div>
-    </div>
+  <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+  <div class="clearfix"> </div>
+</div>

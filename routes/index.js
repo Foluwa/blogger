@@ -3,14 +3,10 @@ const router = express.Router();
 var passport = require('passport');
 var Post = require('../models/post.js');
 
-
-const hbs = require('hbs');
-
 // var csrf = require('csurf');
 // var csrfProtection = csrf();
 // router.use(csrfProtection);
-
-const Controller = require('../controller/controller.js');
+//const Controller = require('../controller/controller.js');
 
 // GET HOME PAGE. 
 router.get('/', function (req, res, next) {
@@ -23,26 +19,59 @@ router.get('/', function (req, res, next) {
                     }
                 }
                 res.render('main/index',{ 
-                    //user: req.user.email,
-                    posts: productChunks,
-                    //csrfToken: req.csrfToken(),
-                    //name:name 
+                    posts: productChunks
             });     
         });
 });
 
 
 // GET BLOG CONTENT PAGE
-router.get('/content', function (req, res, next) {
-        res.render('main/content',{
-    });
+// router.get('/:id', function (req, res, next) {
+
+//         var productChunks = [];
+//             var id = req.params.id;
+//             //console.log("Post is " +_id);
+//             Post.find({'_id':id}).then((result) => {
+//                 if(result){
+//                     for (var i = 0; i < result.length; i++) {
+//                     productChunks.push([result[i]]);
+//                     }
+//                 }
+//                 console.log(productChunks);
+//                 res.render('main/content',{ 
+//                     posts: productChunks
+//             });   
+//         });     
+
+// });
+
+
+
+//GET BLOG CONTENT PAGE
+router.get('/content/:id', function (req, res, next) {
+
+        var productChunks = [];
+            var id = req.params.id;
+            //console.log("Post is " +_id);
+            Post.find({'_id':id}).then((result) => {
+                if(result){
+                    for (var i = 0; i < result.length; i++) {
+                    productChunks.push([result[i]]);
+                    }
+                }
+                console.log(productChunks);
+                res.render('main/content',{ 
+                    posts: productChunks
+            });   
+        });     
+
 });
 
 
 //ADMINDASHBOARD
 router.get('/dashboard', function (req, res, next) {
-    var productChunks = [];
-            
+    console.log("GET ROUTE /dashboard")
+            var productChunks = [];
             Post.find({}).then((result) => {
                 if(result){
                     for (var i = 0; i < result.length; i++) {
@@ -50,20 +79,13 @@ router.get('/dashboard', function (req, res, next) {
                     }
                 }
                 res.render('admin/dashboard',{ 
-                    //user: req.user.email,
-                    posts: productChunks,
-                    //csrfToken: req.csrfToken(),
-                    //name:name 
-            });     
-        });
+                    posts: productChunks 
+              });     
+            });
+    
 });
 
 
-// //ADMINDASHBOARD2
-// router.get('/submit-blog-post', function (req, res, next) {
-//         res.render('admin/dashboard',{
-//     });
-// });
 
 //SUBMIT BLOG POST   
 router.post('/submit-blog-post', function(req,res) {
