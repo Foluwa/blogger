@@ -183,9 +183,9 @@ router.post('/signin', passport.authenticate('local.signin', {
     if (req.session.oldUrl) {
         var oldUrl = req.session.oldUrl;
         req.session.oldUrl = null;
-        res.redirect(oldUrl,{csrfToken: req.csrfToken()});
+        res.redirect(oldUrl);
     } else { 
-        res.redirect('/dashboard',{csrfToken: req.csrfToken()});
+        res.redirect('/dashboard');
     }
 });
 
