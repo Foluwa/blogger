@@ -46,7 +46,7 @@
         {{# each posts }} 
         {{# each this }} 
             <div class="col-md-6 nam-matis-1">
-              <a href="single.html"><img src="{{this.url}}" class="img-responsive" alt=""></a>
+              <a href="/content/{{this.id}}"><img src="{{this.url}}" class="img-responsive" alt=""></a>
               <h3><a href="/content/{{this.id}}">{{this.title}}</a></h3>
               <p><a href="/content/{{this.id}}">Read More</a></p>
             </div>
@@ -78,20 +78,20 @@
     <div class="blo-top">
       <div class="blog-grids">
         <div class="blog-grid-left">
-          <a href="single.html"><img src="images/1b.jpg" class="img-responsive" alt=""></a>
+          <a href="/"><img src="images/1b.jpg" class="img-responsive" alt=""></a>
         </div>
         <div class="blog-grid-right">
-          <h4><a href="single.html">Little Invaders </a></h4>
+          <h4><a href="/">Little Invaders </a></h4>
           <p>pellentesque dui, non felis. Maecenas male </p>
         </div>
         <div class="clearfix"> </div>
       </div>
       <div class="blog-grids">
         <div class="blog-grid-left">
-          <a href="single.html"><img src="images/2b.jpg" class="img-responsive" alt=""></a>
+          <a href="/"><img src="images/2b.jpg" class="img-responsive" alt=""></a>
         </div>
         <div class="blog-grid-right">
-          <h4><a href="single.html">Little Invaders </a></h4>
+          <h4><a href="/">Little Invaders </a></h4>
           <p>pellentesque dui, non felis. Maecenas male </p>
         </div>
         <div class="clearfix"> </div>
@@ -101,7 +101,7 @@
           <a href=""><img src="images/3b.jpg" class="img-responsive" alt=""></a>
         </div>
         <div class="blog-grid-right">
-          <h4><a href="single.html">Little Invaders </a></h4>
+          <h4><a href="/">Little Invaders </a></h4>
           <p>pellentesque dui, non felis. Maecenas male </p>
         </div>
         <div class="clearfix"> </div>
@@ -168,3 +168,32 @@
   <script type="text/javascript" src="js/jquery.flexisel.js"></script>
   <div class="clearfix"> </div>
 </div>
+
+
+<script type="text/javascript">
+  //SUBSCRIBE USERS
+  $('.addMyProduct').on('submit',function(e){
+    e.preventDefault();
+    $.ajax({
+      url: "/products",
+      method: "post",
+      data: $('.addMyProduct').serialize(),
+      beforeSend: function(){
+        console.log("Sending....");
+        $("#insertProduct").html("Sending.....");
+      },
+      success: function(res){
+        alert('done');
+        $("#insertProduct").html("Upload");
+        $("#suc").html('<div class="alert alert-success"><p>Added Successfully</p></div>')
+      },
+      error: function(err){
+        alert("Not Done")
+        $("#suc").html('<div class="alert alert-danger"><p>Error Uploading Product</p></div>')
+        console.log(err);
+        $("#insertProduct").html("Upload");
+
+      }
+    })
+  })
+</script>

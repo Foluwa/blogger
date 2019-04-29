@@ -71,6 +71,7 @@ router.get('/content/:id', function (req, res, next) {
 //ADMINDASHBOARD
 router.get('/dashboard', isLoggedIn, function (req, res, next) {
     console.log("GET ROUTE /dashboard")
+    var successMsg = req.flash('success')[0];
             var productChunks = [];
             Post.find({}).then((result) => {
                 if(result){
@@ -80,7 +81,9 @@ router.get('/dashboard', isLoggedIn, function (req, res, next) {
                 }
                 res.render('admin/dashboard',{ 
                     posts: productChunks,
-                    csrfToken: req.csrfToken()
+                    csrfToken: req.csrfToken(),
+                    successMsg: successMsg, 
+                    noMessages: !successMsg
               });     
             });
     
@@ -92,6 +95,7 @@ router.get('/dashboard', isLoggedIn, function (req, res, next) {
 router.post('/submit-blog-post', isLoggedIn,function(req,res) {
           console.log("About to submit blog post ");
           console.log("About to save to the database");
+          var successMsg = req.flash('success')[0];
           var post = new Post({ 
                 title : req.body.title,
                 body : req.body.body,
@@ -117,7 +121,9 @@ router.post('/submit-blog-post', isLoggedIn,function(req,res) {
                 });
       
         //res.redirect('/dashboard',{
-              res.render('admin/dashboard',{csrfToken: req.csrfToken()
+              res.render('admin/dashboard',{csrfToken: req.csrfToken(),
+                    successMsg: successMsg, 
+                    noMessages: !successMsg
 
         });
     });
@@ -142,6 +148,8 @@ router.get("/delete/:id",isLoggedIn, function(req, res){
 
 
 
+
+
 //SIGN UP
 router.get('/signup', function (req, res, next) {
         res.render('main/sign-up',{
@@ -161,7 +169,7 @@ router.post('/signup', passport.authenticate('local.signup', {
         req.session.oldUrl = null;
         res.redirect(oldUrl);
     } else {
-        res.redirect('/dashboard',{ csrfToken: req.csrfToken()})
+        res.redirect('/dashboard')
     }
 });
 
@@ -187,6 +195,13 @@ router.post('/signin', passport.authenticate('local.signin', {
     } else { 
         res.redirect('/dashboard');
     }
+});
+
+
+//LOGOUT ROUTE
+router.get('/logout', isLoggedIn, function (req, res, next) {
+    req.logout();
+    res.redirect('/');
 });
 
 
