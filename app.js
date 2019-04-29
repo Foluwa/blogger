@@ -20,7 +20,7 @@ const port = process.env.PORT ||3003;
 mongoose.Promise = global.Promise;
 //mongodb://wgbadmin:wgbadmin1@ds227594.mlab.com:27594/the-wgb
 //mongodb://localhost/blogger
-mongoose.connect("mongodb://localhost/blogger", { useNewUrlParser: true}).then(
+mongoose.connect("mongodb://wgbadmin:wgbadmin1@ds227594.mlab.com:27594/the-wgb", { useNewUrlParser: true}).then(
   function(res){
    console.log("Connected to Database Successfully.");
   }
