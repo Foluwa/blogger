@@ -11,17 +11,16 @@
 			   <div class="col-md-6 login-right wow fadeInRight" data-wow-delay="0.4s">
 					<h3>REGISTERED CUSTOMERS</h3>
 					<p>If you have an account with us, please log in.</p>
-					<form method="POST" action="/signin">
+					<form>
 						<div>
-							<span>Email Address <label style="color:red;"> *</label></span>
-							<input type="email" name="email" id="email"> 
+							<span>Email Address<label>*</label></span>
+							<input type="text"> 
 						</div>
 						<div>
-							<span>Password <label style="color:red;"> *</label></span>
-							<input type="password" name="password" id="password"> 
+							<span>Password<label>*</label></span>
+							<input type="password"> 
 						</div>
-						<!-- <a class="forgot" href="#">Forgot Your Password?</a> -->
-						<input type="hidden" name="_csrf" value="{{ csrfToken }}">
+						<a class="forgot" href="#">Forgot Your Password?</a>
 						<input type="submit" value="Login">
 					</form>
 			   </div>	

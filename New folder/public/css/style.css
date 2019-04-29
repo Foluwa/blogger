@@ -1532,7 +1532,7 @@ a.b-home:hover{
 	display: block;
 	text-transform: uppercase;
 }
-.login-right input[type="email"] {
+.login-right input[type="text"] {
 	border: 1px solid #26313b;
 	outline-color:#26313b;
 	width: 96%;

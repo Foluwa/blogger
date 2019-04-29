@@ -3,25 +3,25 @@ const router = express.Router();
 var passport = require('passport');
 var Post = require('../models/post.js');
 
-var csrf = require('csurf');
-var csrfProtection = csrf();
-router.use(csrfProtection);
+// var csrf = require('csurf');
+// var csrfProtection = csrf();
+// router.use(csrfProtection);
+//const Controller = require('../controller/controller.js');
 
 // GET HOME PAGE. 
 router.get('/', function (req, res, next) {
     var productChunks = [];
             
-            Post.find({}).sort({ _id: -1 }).then((result) => {
+            Post.find({}).then((result) => {
                 if(result){
                     for (var i = 0; i < result.length; i++) {
                     productChunks.push([result[i]]);
                     }
                 }
                 res.render('main/index',{ 
-                    posts: productChunks,
-                    csrfToken: req.csrfToken()    
+                    posts: productChunks
+            });     
         });
-     });
 });
 
 
@@ -69,7 +69,7 @@ router.get('/content/:id', function (req, res, next) {
 
 
 //ADMINDASHBOARD
-router.get('/dashboard', isLoggedIn, function (req, res, next) {
+router.get('/dashboard', function (req, res, next) {
     console.log("GET ROUTE /dashboard")
             var productChunks = [];
             Post.find({}).then((result) => {
@@ -79,8 +79,7 @@ router.get('/dashboard', isLoggedIn, function (req, res, next) {
                     }
                 }
                 res.render('admin/dashboard',{ 
-                    posts: productChunks,
-                    csrfToken: req.csrfToken()
+                    posts: productChunks 
               });     
             });
     
@@ -89,7 +88,7 @@ router.get('/dashboard', isLoggedIn, function (req, res, next) {
 
 
 //SUBMIT BLOG POST   
-router.post('/submit-blog-post', isLoggedIn,function(req,res) {
+router.post('/submit-blog-post', function(req,res) {
           console.log("About to submit blog post ");
           console.log("About to save to the database");
           var post = new Post({ 
@@ -108,8 +107,7 @@ router.post('/submit-blog-post', isLoggedIn,function(req,res) {
                     console.log('Post saved successfully');
                     }).catch(err => {
                     res.status(500).send({
-                    message: err.message,
-                    csrfToken: req.csrfToken()
+                    message: err.message
             })
                 })
                 .catch((uploaderror)=>{
@@ -117,13 +115,13 @@ router.post('/submit-blog-post', isLoggedIn,function(req,res) {
                 });
       
         //res.redirect('/dashboard',{
-              res.render('admin/dashboard',{csrfToken: req.csrfToken()
+              res.render('admin/dashboard',{
 
         });
     });
 
 //DELETE BLOG POST
-router.get("/delete/:id",isLoggedIn, function(req, res){
+router.get("/delete/:id", function(req, res){
    //FIND AND DELETE GROUP
     console.log("Your id is " + req.params.id)
     Post
@@ -141,12 +139,16 @@ router.get("/delete/:id",isLoggedIn, function(req, res){
 });
 
 
+//SIGN IN
+router.get('/signin', function (req, res, next) {
+        res.render('main/sign-in',{
+    });
+});
 
 //SIGN UP
 router.get('/signup', function (req, res, next) {
         res.render('main/sign-up',{
-            csrfToken: req.csrfToken()
-        });
+    });
 });
 
 //DISPLAY SIGNUP
@@ -154,38 +156,35 @@ router.post('/signup', passport.authenticate('local.signup', {
     failureRedirect: '/signup',
     failureFlash: true
     }), function (req, res, next) {
+        //
     console.log("Your email is "+req.body.email);
-    console.log("Your email is "+req.body.password);
     if (req.session.oldUrl) {
         var oldUrl = req.session.oldUrl;
         req.session.oldUrl = null;
         res.redirect(oldUrl);
     } else {
-        res.redirect('/dashboard',{ csrfToken: req.csrfToken()})
+        res.redirect('main/dashboard');
     }
 });
-
 
 //GET REQUEST TO SIGN IN
 router.get('/signin', function (req, res, next) {
     var messages = req.flash('error');
-        res.render('main/sign-in' ,{
-            csrfToken: req.csrfToken()
-        });
+        res.render('main/dashboard', {csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0});
 });
-
 
 //POST TO SIGNIN
 router.post('/signin', passport.authenticate('local.signin', {
     failureRedirect: '/signin',
     failureFlash: true
 }), function (req, res, next) {
+    console.log("Your email is "+req.body.email);
     if (req.session.oldUrl) {
         var oldUrl = req.session.oldUrl;
         req.session.oldUrl = null;
-        res.redirect(oldUrl,{csrfToken: req.csrfToken()});
+        res.redirect(oldUrl);
     } else { 
-        res.redirect('/dashboard',{csrfToken: req.csrfToken()});
+        res.redirect('/dashboard');
     }
 });
 
