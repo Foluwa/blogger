@@ -18,33 +18,10 @@ router.get('/', function (req, res, next) {
                     }
                 }
                 res.render('main/index',{ 
-                    posts: productChunks,
-                    csrfToken: req.csrfToken()    
+                    posts: productChunks    
         });
      });
 });
-
-
-// GET BLOG CONTENT PAGE
-// router.get('/:id', function (req, res, next) {
-
-//         var productChunks = [];
-//             var id = req.params.id;
-//             //console.log("Post is " +_id);
-//             Post.find({'_id':id}).then((result) => {
-//                 if(result){
-//                     for (var i = 0; i < result.length; i++) {
-//                     productChunks.push([result[i]]);
-//                     }
-//                 }
-//                 console.log(productChunks);
-//                 res.render('main/content',{ 
-//                     posts: productChunks
-//             });   
-//         });     
-
-// });
-
 
 
 //GET BLOG CONTENT PAGE
@@ -139,7 +116,7 @@ router.get("/delete/:id",isLoggedIn, function(req, res){
         if(!doc) {
             return res.status(404).end(); 
         }
-        res.redirect("/dashboard");
+        res.redirect("/dashboard",{csrfToken: req.csrfToken()});
         return res.status(204).end();
 
     })

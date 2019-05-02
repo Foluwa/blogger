@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js"
   },
-  "author": "",
+  "author": "AKINTOLA MORONFOLWA",
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
